@@ -9,7 +9,7 @@ def hello():
 
 # Functions are just normal objects, and as such they can be inspected
 type(hello)
-dir(hello)
+funcs = dir(hello)
 
 # higher-order functions
 fruits = ['fig', 'cherry', 'apple', 'blueberry']
@@ -23,6 +23,10 @@ sorted(fruits, key=firstletter)
 a = map(lambda x: 2*x, range(6))
 type(a)
 dir(a)
+
+for x in a:
+    print(x)
+
 
 # Lambda Expressions
 # example of a simple anonymous function in python
@@ -80,5 +84,7 @@ for x in range(5):
 alist = [adder(10) for adder in adders]
 blist = [adder(20) for adder in adders]
 
+def make_adder(x):
+    return lambda y: x + y
 
 # Exercise: implement the higher-order function map

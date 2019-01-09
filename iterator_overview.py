@@ -103,6 +103,9 @@ def to(num):
 
 
 a = [x for _, x in zip(range(10), to(1000000))]
+for i in to100():
+    print(i)
+
 print(a)
 
 #
@@ -113,6 +116,7 @@ print(a)
 implementsIteration = '__iter__' in dir(to100())
 print(implementsIteration)
 
+print('__next__' in dir(to100()))
 ################################################################################
 #
 # itertools overview
@@ -140,4 +144,22 @@ clist = itertools.takewhile(lambda x: x < 10, astream)
 # in all cases, there is a little gotcha with the above code. 
 print(alist == blist) # what do you think the result would be here
 
-#
+def make_averager():
+    series = []
+    def average(value):
+        series.append(value)
+        total = sum(series)
+        avg = 1.0*(total / len(series))
+        return avg
+    return average
+
+def make_average2():
+    total = 0
+    count = 0
+    def average(value):
+        nonlocal total, count
+        count = count + 1
+        total += value
+        avg = 1.0*(total / count)
+        return avg
+    return average
